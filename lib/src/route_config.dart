@@ -133,7 +133,8 @@ extension $_extensionName on $_className {
       'builder: (context, state, navigationShell) => $_extensionName._fromState(state).builder(context, state, navigationShell),';
 
   @override
-  String get routeDataClassName => 'StatefulShellRoute';
+  String get routeDataClassName =>
+      navigatorContainerBuilder != null ? 'StatefulShellRoute' : 'StatefulShellRoute.indexedStack';
 
   @override
   String get dataConvertionFunctionName => r'$route';
@@ -558,7 +559,11 @@ abstract class RouteBaseConfig {
   final RouteBaseConfig? parent;
 
   static String _generateChildrenGetterName(String name) {
-    return (name == 'TypedStatefulShellRoute' || name == 'StatefulShellRoute') ? 'branches' : 'routes';
+    return (name == 'TypedStatefulShellRoute' ||
+            name == 'StatefulShellRoute.indexedStack' ||
+            name == 'StatefulShellRoute')
+        ? 'branches'
+        : 'routes';
   }
 
   static String? _generateParameterGetterCode(InterfaceElement classElement, {required String parameterName}) {

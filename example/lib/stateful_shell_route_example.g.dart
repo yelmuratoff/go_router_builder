@@ -15,14 +15,17 @@ List<RouteBase> get $appRoutes => [
 RouteBase get $myShellRouteData => StatefulShellRoute(
       restorationScopeId: MyShellRouteData.$restorationScopeId,
       navigatorContainerBuilder: MyShellRouteData.$navigatorContainerBuilder,
-      builder: (context, state, navigationShell) =>
-          $MyShellRouteDataExtension._fromState(state).builder(context, state, navigationShell),
+      builder: (context, state, navigationShell) => $MyShellRouteDataExtension
+          ._fromState(state)
+          .builder(context, state, navigationShell),
       branches: [
         StatefulShellBranch(
           routes: [
             GoRoute(
               path: '/detailsA',
-              builder: (context, state) => $DetailsARouteDataExtension._fromState(state).build(context, state),
+              builder: (context, state) => $DetailsARouteDataExtension
+                  ._fromState(state)
+                  .build(context, state),
             ),
           ],
         ),
@@ -32,7 +35,9 @@ RouteBase get $myShellRouteData => StatefulShellRoute(
           routes: [
             GoRoute(
               path: '/detailsB',
-              builder: (context, state) => $DetailsBRouteDataExtension._fromState(state).build(context, state),
+              builder: (context, state) => $DetailsBRouteDataExtension
+                  ._fromState(state)
+                  .build(context, state),
             ),
           ],
         ),
@@ -40,7 +45,8 @@ RouteBase get $myShellRouteData => StatefulShellRoute(
     );
 
 extension $MyShellRouteDataExtension on MyShellRouteData {
-  static MyShellRouteData _fromState(GoRouterState state) => const MyShellRouteData();
+  static MyShellRouteData _fromState(GoRouterState state) =>
+      const MyShellRouteData();
 }
 
 extension $DetailsARouteDataExtension on DetailsARouteData {
@@ -59,13 +65,15 @@ extension $DetailsARouteDataExtension on DetailsARouteData {
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
 
 extension $DetailsBRouteDataExtension on DetailsBRouteData {
-  static DetailsBRouteData _fromState(GoRouterState state) => const DetailsBRouteData();
+  static DetailsBRouteData _fromState(GoRouterState state) =>
+      const DetailsBRouteData();
 
   String get location => GoRouteData.$location(
         '/detailsB',
@@ -75,7 +83,8 @@ extension $DetailsBRouteDataExtension on DetailsBRouteData {
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
